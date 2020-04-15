@@ -50,7 +50,7 @@ class OngsController extends Controller
 
             Ongs::create([
                 'id' => $id,
-                'name' => $request->post('nome', ''),
+                'name' => $request->post('name', ''),
                 'email'=> $request->post('email', ''),
                 'whatsapp' => $request->post('whatsapp', ''),
                 'city' => $request->post('city', ''),
