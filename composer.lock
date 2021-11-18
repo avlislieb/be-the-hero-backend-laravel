@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc92a39195538253b6dc2c7c17282a26",
+    "content-hash": "aa01c28aa348a7985837ab6d05eca5c1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4019,32 +4019,33 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.6.2",
+            "version": "v1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "e4f5a2653ca503782a31486198bd1dd1c9a47f83"
+                "reference": "0170279814f86648c62aede39b100a343ea29962"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/e4f5a2653ca503782a31486198bd1dd1c9a47f83",
-                "reference": "e4f5a2653ca503782a31486198bd1dd1c9a47f83",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/0170279814f86648c62aede39b100a343ea29962",
+                "reference": "0170279814f86648c62aede39b100a343ea29962",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
-                "php": "^7.0"
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": ">=7.1"
             },
             "require-dev": {
-                "composer/composer": "^1.0.2",
-                "symfony/dotenv": "^3.4|^4.0|^5.0",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0",
-                "symfony/process": "^2.7|^3.0|^4.0|^5.0"
+                "composer/composer": "^1.0.2|^2.0",
+                "symfony/dotenv": "^4.4|^5.0",
+                "symfony/filesystem": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^4.4.12|^5.0",
+                "symfony/process": "^3.4|^4.4|^5.0"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-main": "1.17-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -4064,7 +4065,25 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2020-01-30T12:06:45+00:00"
+            "support": {
+                "issues": "https://github.com/symfony/flex/issues",
+                "source": "https://github.com/symfony/flex/tree/v1.17.2"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-21T08:39:19+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -7771,9 +7790,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5",
+        "php": "^7.4",
         "ext-pdo_sqlite": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -8,14 +8,15 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4",
+        "ext-pdo_sqlite": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "fzaninotto/faker": "^1.9",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "ext-pdo_sqlite": "*"
+        "symfony/flex": "^1.17"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -63,6 +64,10 @@
         ],
         "test-controllers": [
             "vendor/bin/phpunit tests/Feature/Controller/"
-        ]
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }

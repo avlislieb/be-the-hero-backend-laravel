@@ -28,6 +28,7 @@ Route::group(['middleware' => ['sessions']], function (){
     Route::delete('/session', 'SessionController@delete');
 
     Route::get('/incidents', 'IncidentsController@index');
+    Route::get('/incidents/show/{id}', 'IncidentsController@show');
     Route::post('/incidents', 'IncidentsController@store');
     Route::delete('/incidents/{id}', 'IncidentsController@delete');
 

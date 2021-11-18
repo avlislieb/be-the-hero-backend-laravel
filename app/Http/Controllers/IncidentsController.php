@@ -70,6 +70,25 @@ class IncidentsController extends Controller
         return response()->json([ 'id' => $id ], 200);
     }
 
+    public function show($id, Request $request)
+    {
+        $validator = Validator::make(['id' => $id], [
+            'id' => [
+                'required',
+                'numeric',
+                'exists:incidents,id',
+            ]
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toArray(), 422);
+        }
+
+        $incidents = Incidents::with('Ongs')->find($id);
+
+        return response()->json($incidents, 200);
+    }
+
     public function delete(Request $request, $id)
     {
         $validator = Validator::make(array_merge(
