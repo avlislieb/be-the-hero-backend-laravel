@@ -87,7 +87,7 @@ class IncidentsController extends Controller
             return response()->json($validator->errors()->toArray(), 422);
         }
 
-        $incidents = Incidents::with('Ongs')->find($id);
+        $incidents = Incidents::with('ong')->find($id);
 
         return response()->json($incidents, 200);
     }
