@@ -18,7 +18,7 @@ class ProfileController extends Controller
         if($validator->fails())
             return response()->json($validator->errors()->toArray(),422);
 
-        $listIncidents = Incidents::with('Ongs')->where('ong_id', $request->header('authorization'))->get();
+        $listIncidents = Incidents::with('ong')->where('ong_id', $request->header('authorization'))->get();
 
         return response()->json($listIncidents, 200);
     }

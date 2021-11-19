@@ -7,6 +7,7 @@ use App\Models\Ongs;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +25,7 @@ class IncidentsController extends Controller
         }
         $page = (int) $request->get('page', 1);
 
-        $listIncidents = Incidents::with('Ongs')
+        $listIncidents = Incidents::with('ong:id,name,email')
             ->skip((($page - 1) * 5))
             ->take(5)
             ->get();
@@ -34,40 +35,42 @@ class IncidentsController extends Controller
 
     public function store(Request $request)
     {
-
-
         $validator = Validator::make(array_merge(['authorization' => $request->header('authorization')], $request->all()),[
             'authorization' => ['required', 'string', 'exists:ongs,id'],
             'title' => ['required', 'string', 'min:3'],
             'description' => ['required', 'string'],
-            'value' => ['required', 'numeric']
+            'value' => ['required', 'numeric'],
+            'image' => ['required']
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toArray(), 422);
         }
 
-        try{
+        try {
             DB::beginTransaction();
 
-            ['title' => $title, 'description' => $description, 'value' => $value] = $request->all();
-
+            $dataInsert = $request->all();
             $ong = Ongs::findOrFail($request->header('authorization'));
 
-            ['id' => $id] = $ong->Incidents()->create([
-                'title' => $title,
-                'description' => $description,
-                'value' => $value
-            ]);
+            $dataInsert['image'] = null;
+            if ($request->file('image')->isValid()) {
+                $dataInsert['image'] = $request->file('image')->storeAs(
+                    'incidents/images', $request->file('image')->hashName()
+                );
+            }
+
+            ['id' => $id] = $ong->Incidents()->create($dataInsert);
 
             DB::commit();
-        }catch(\Exception $e){
+            return response()->json([ 'id' => $id ], 201);
+        } catch(\Exception $e) {
             DB::rollback();
-
+            Log::error('store', [
+                'error' => $e
+            ]);
             return response()->json(['error' => $e->getMessage()], 400);
         }
-
-        return response()->json([ 'id' => $id ], 200);
     }
 
     public function show($id, Request $request)
